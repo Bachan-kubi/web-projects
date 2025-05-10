@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bookstore Inventory System</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; background: #f4f4f4; }
+    h2 { color: #333; }
+    form, table { margin-bottom: 20px; }
+    input, textarea, button, select { padding: 8px; margin: 5px; width: 100%; max-width: 300px; }
+    table { width: 100%; border-collapse: collapse; background: #fff; }
+    th, td { border: 1px solid #ccc; padding: 10px; text-align: left; }
+    .out-of-stock { background-color: #f8d7da; }
+    .message { margin-top: 10px; color: green; }
+    .hidden { display: none; }
+  </style>
+</head>
+<body>
+  <h2>📚 Bookstore Inventory Management</h2>
+
+  <form id="authorForm">
+    <h3>Add Author</h3>
+    <input type="text" id="authorName" placeholder="Author Name" required />
+    <textarea id="biography" placeholder="Biography"></textarea>
+    <input type="text" id="nationality" placeholder="Nationality" required />
+    <button type="submit">Add Author</button>
+  </form>
+
+  <form id="bookForm">
+    <h3>Add / Edit Book</h3>
+    <input type="text" id="title" placeholder="Book Title" required />
+    <select id="authorSelect"></select>
+    <input type="text" id="isbn" placeholder="ISBN" required />
+    <input type="number" id="price" placeholder="Price" required />
+    <input type="number" id="stock" placeholder="Stock" required />
+    <button type="submit">Save Book</button>
+    <input type="hidden" id="editIndex" />
+  </form>
+
+  <input type="text" id="searchBox" placeholder="Search by title or author..." />
+
+  <table>
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Author</th>
+        <th>ISBN</th>
+        <th>Price</th>
+        <th>Stock</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody id="bookList"></tbody>
+  </table>
+
+  <div id="message" class="message hidden"></div>
+
+  <script>
+    class Author {
+      constructor(name, biography, nationality) {
+        this.name = name;
+        this.biography = biography;
+        this.nationality = nationality;
+      }
+    }
+
+    class Book {
+      #stock;
+      constructor(title, author, isbn, price, stock) {
+        this.title = title;
+        this.author = author;
+        this.isbn = isbn;
+        this.price = parseFloat(price);
+        this.#stock = parseInt(stock);
+      }
+
+      get stock() {
+        return this.#stock;
+      }
+
+      set stock(value) {
+        this.#stock = parseInt(value);
+      }
+
+      isOutOfStock() {
+        return this.#stock <= 0;
+      }
+
+      displayBookInfo() {
+        return `${this.title} by ${this.author.name} - $${this.price.toFixed(2)} (${this.stock} in stock)`;
+      }
+    }
+
+    class InventoryManager {
+      constructor() {
+        this.books = [];
+        this.authors = [];
+      }
+
+      addAuthor(author) {
+        this.authors.push(author);
+        this.updateAuthorSelect();
+      }
+
+      addBook(book) {
+        this.books.push(book);
+        this.renderBooks();
+        this.showMessage("Book Added Successfully!");
+      }
+
+      editBook(index, book) {
+        this.books[index] = book;
+        this.renderBooks();
+        this.showMessage("Book Updated Successfully!");
+      }
+
+      deleteBook(index) {
+        this.books.splice(index, 1);
+        this.renderBooks();
+        this.showMessage("Book Deleted.");
+      }
+
+      filterBooks(query) {
+        return this.books.filter(book =>
+          book.title.toLowerCase().includes(query.toLowerCase()) ||
+          book.author.name.toLowerCase().includes(query.toLowerCase())
+        );
+      }
+
+      updateAuthorSelect() {
+        const select = document.getElementById("authorSelect");
+        select.innerHTML = "";
+        this.authors.forEach((author, index) => {
+          const option = document.createElement("option");
+          option.value = index;
+          option.textContent = author.name;
+          select.appendChild(option);
+        });
+      }
+
+      renderBooks(filtered = null) {
+        const list = document.getElementById("bookList");
+        list.innerHTML = "";
+        const booksToRender = filtered || this.books;
+        booksToRender.forEach((book, index) => {
+          const row = document.createElement("tr");
+          if (book.isOutOfStock()) row.classList.add("out-of-stock");
+
+          row.innerHTML = `
+            <td>${book.title}</td>
+            <td>${book.author.name}</td>
+            <td>${book.isbn}</td>
+            <td>$${book.price.toFixed(2)}</td>
+            <td>${book.stock}</td>
+            <td>
+              <button onclick="editBook(${index})">Edit</button>
+              <button onclick="inventory.deleteBook(${index})">Delete</button>
+            </td>
+          `;
+          list.appendChild(row);
+        });
+      }
+
+      showMessage(msg) {
+        const div = document.getElementById("message");
+        div.textContent = msg;
+        div.classList.remove("hidden");
+        setTimeout(() => div.classList.add("hidden"), 2000);
+      }
+    }
+
+    const inventory = new InventoryManager();
+
+    document.getElementById("authorForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const name = document.getElementById("authorName").value;
+      const bio = document.getElementById("biography").value;
+      const nation = document.getElementById("nationality").value;
+      inventory.addAuthor(new Author(name, bio, nation));
+      this.reset();
+    });
+
+    document.getElementById("bookForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const title = document.getElementById("title").value;
+      const authorIndex = document.getElementById("authorSelect").value;
+      const isbn = document.getElementById("isbn").value;
+      const price = document.getElementById("price").value;
+      const stock = document.getElementById("stock").value;
+      const editIndex = document.getElementById("editIndex").value;
+
+      const book = new Book(title, inventory.authors[authorIndex], isbn, price, stock);
+      if (editIndex === "") {
+        inventory.addBook(book);
+      } else {
+        inventory.editBook(editIndex, book);
+      }
+      this.reset();
+    });
+
+    document.getElementById("searchBox").addEventListener("input", function() {
+      const filtered = inventory.filterBooks(this.value);
+      inventory.renderBooks(filtered);
+    });
+
+    function editBook(index) {
+      const book = inventory.books[index];
+      document.getElementById("title").value = book.title;
+      document.getElementById("authorSelect").value = inventory.authors.indexOf(book.author);
+      document.getElementById("isbn").value = book.isbn;
+      document.getElementById("price").value = book.price;
+      document.getElementById("stock").value = book.stock;
+      document.getElementById("editIndex").value = index;
+    }
+  </script>
+</body>
+</html>
