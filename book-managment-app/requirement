@@ -1,0 +1,78 @@
+📄 OOP Project Requirement Document (JavaScript)
+📌 Project Title:
+Online Bookstore Inventory Management System
+
+🧠 Objective:
+To develop a browser-based inventory management system for a small online bookstore using Object-Oriented Programming (OOP) principles in JavaScript.
+
+🎯 Goals:
+Implement classes and objects to manage books, authors, and inventory.
+
+Practice core OOP concepts: encapsulation, inheritance, polymorphism, and abstraction.
+
+Use JavaScript (ES6+), HTML, and CSS for a responsive frontend.
+
+📚 Functional Requirements:
+1. Book Management
+Add new books with details: title, author, ISBN, price, and stock.
+
+Edit existing book details.
+
+Delete books from inventory.
+
+Display a list of all available books.
+
+2. Author Management
+Add authors with details: name, biography, nationality.
+
+Link books to authors.
+
+View all books by a specific author.
+
+3. Inventory Management
+Update stock levels when books are sold or restocked.
+
+Automatically mark books as "Out of Stock" when stock reaches 0.
+
+Search and filter books by title, author, or category.
+
+4. User Interface
+Basic UI with forms and tables using HTML and CSS.
+
+Feedback messages for actions like "Book Added", "Deleted", etc.
+
+🧱 Technical Requirements:
+Languages & Technologies:
+JavaScript (ES6+)
+
+HTML5 & CSS3 (no frameworks required)
+
+Optionally: Bootstrap for styling
+
+JavaScript OOP Concepts to Use:
+Classes & Constructors for Book, Author, and InventoryManager.
+
+Encapsulation using private fields (e.g., #stock).
+
+Inheritance (e.g., if you create a DigitalBook subclass).
+
+Polymorphism using method overriding (e.g., displayBookInfo()).
+
+Abstraction to separate logic between UI and data handling.
+
+🧪 Non-functional Requirements:
+Code should follow best practices and be well-documented.
+
+Responsive design for use on both desktop and mobile.
+
+User input validation using JavaScript.
+
+📅 Timeline (Suggested):
+Task	Deadline
+Requirement Finalization	Day 1
+Class Design & Data Structures	Day 2
+Book & Author Modules	Day 4
+Inventory Logic	Day 6
+UI Development	Day 8
+Testing & Debugging	Day 9
+Final Submission	Day 10
