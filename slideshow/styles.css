@@ -1,0 +1,43 @@
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+img{
+    width: 100%;
+}
+.slides{
+    max-width: 70%;
+    margin: auto;
+    position: relative;
+}
+.img-caption{
+    position: absolute;
+    bottom: 15px;
+    text-align: center;
+    color: rgb(235, 143, 31);
+    font-size: 22px;
+    font-weight: bold;
+    width: 100%;
+    padding: 12px;
+}
+.numberTxt{
+    position: absolute;
+    top: 0;
+    left: 10px;
+    color: rgb(235, 143, 31);
+    padding: 10px 12px;
+}
+.dots{
+    text-align: center;
+}
+.dot{
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    color: black;
+    background-color: green;
+    display: inline-block;
+    margin: 0 2px;
+    transition: background-color 0.6s ease;
+}
