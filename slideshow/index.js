@@ -30,14 +30,14 @@ function slideShow(){
     for(let i = 0; i < slides.length; i++){
         slides[i].style.display = 'none';
     }
-
+    console.log(slideIndex);
     slideIndex++;
-    if(slideIndex > slides.length){ slideIndex = 1; }
 
+    if(slideIndex > slides.length){ slideIndex = 1; }
+// dots
     for(let i = 0; i < dots.length; i++){
         dots[i].classList.remove("active");
     }
-
     slides[slideIndex-1].style.display = 'block';
     dots[slideIndex-1].classList.add("active");
 

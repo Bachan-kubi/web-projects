@@ -1,0 +1,94 @@
+✅ 1. Initialize the index
+js
+Copy
+Edit
+let slideIndex = 0;
+This variable keeps track of which slide is currently being shown.
+
+It starts at 0, and will be incremented in each cycle of the slideshow.
+
+✅ 2. Call the function to start the slideshow
+
+slideShow();
+This runs the slideShow() function immediately after the script is loaded, kicking off the automatic slideshow loop.
+
+✅ 3. Define the slideshow function
+js
+Copy
+Edit
+function slideShow(){
+This function handles the logic of hiding all slides, showing the current one, and highlighting the corresponding dot.
+
+✅ 4. Get references to the slides and dots
+js
+Copy
+Edit
+const slides = document.getElementsByClassName("slides");
+const dots = document.getElementsByClassName('dot');
+slides: This is an array-like object containing all elements with class slides (each image slide).
+
+dots: This contains all dot elements, usually small circles under the slideshow that represent the current position.
+
+✅ 5. Hide all slides
+js
+Copy
+Edit
+for(let i = 0; i < slides.length; i++){
+    slides[i].style.display = 'none';
+}
+This loop hides all slides by setting display: none.
+
+Only one slide will be shown at a time.
+
+✅ 6. Move to the next slide
+js
+Copy
+Edit
+slideIndex++;
+if(slideIndex > slides.length){ slideIndex = 1; }
+Increases the slideIndex by 1.
+
+If it exceeds the number of slides, it wraps around to 1 to create an infinite loop.
+
+❗ You use slideIndex - 1 later (because arrays are 0-indexed), so you must start from 1 here.
+
+✅ 7. Deactivate all dots
+js
+Copy
+Edit
+for(let i = 0; i < dots.length; i++){
+    dots[i].classList.remove("active");
+}
+Removes the active class from all dots, so they aren't highlighted anymore.
+
+✅ 8. Show the current slide and highlight the dot
+js
+Copy
+Edit
+slides[slideIndex-1].style.display = 'block';
+dots[slideIndex-1].classList.add("active");
+Shows the current slide.
+
+Highlights the corresponding dot by adding the active class.
+
+slideIndex - 1 is used because arrays start at 0 but you incremented slideIndex to start at 1.
+
+✅ 9. Schedule the next slideshow update
+js
+Copy
+Edit
+setTimeout(slideShow, 2000);
+Calls slideShow() again after 2000 milliseconds (2 seconds).
+
+This creates an automatic slideshow loop.
+
+✅ Overall Flow:
+Hide all slides.
+
+Move to the next slide.
+
+Deactivate all dots.
+
+Show one slide and highlight one dot.
+
+Repeat every 2 seconds.
