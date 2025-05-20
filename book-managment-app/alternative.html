@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Online Bookstore Inventory</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; background: #f9f9f9; }
+    h2 { color: #333; }
+    form, table { margin-bottom: 20px; }
+    input, button { padding: 8px; margin: 5px; }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { border: 1px solid #ccc; padding: 10px; text-align: left; }
+    .out-of-stock { background-color: #f8d7da; }
+  </style>
+</head>
+<body>
+  <h2>Bookstore Inventory Management</h2>
+  <form id="bookForm">
+    <input type="text" id="title" placeholder="Book Title" required />
+    <input type="text" id="author" placeholder="Author" required />
+    <input type="text" id="isbn" placeholder="ISBN" required />
+    <input type="number" id="price" placeholder="Price" required />
+    <input type="number" id="stock" placeholder="Stock" required />
+    <button type="submit">Add Book</button>
+  </form>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Author</th>
+        <th>ISBN</th>
+        <th>Price</th>
+        <th>Stock</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody id="bookList"></tbody>
+  </table>
+
+  <script>
+    class Book {
+      constructor(title, author, isbn, price, stock) {
+        this.title = title;
+        this.author = author;
+        this.isbn = isbn;
+        this.price = parseFloat(price);
+        this.stock = parseInt(stock);
+      }
+
+      isOutOfStock() {
+        return this.stock <= 0;
+      }
+    }
+
+    class InventoryManager {
+      constructor() {
+        this.books = [];
+      }
+
+      addBook(book) {
+        this.books.push(book);
+        this.render();
+      }
+
+      deleteBook(index) {
+        this.books.splice(index, 1);
+        this.render();
+      }
+
+      render() {
+        const list = document.getElementById("bookList");
+        list.innerHTML = "";
+        this.books.forEach((book, index) => {
+          const row = document.createElement("tr");
+          if (book.isOutOfStock()) row.classList.add("out-of-stock");
+
+          row.innerHTML = `
+            <td>${book.title}</td>
+            <td>${book.author}</td>
+            <td>${book.isbn}</td>
+            <td>$${book.price.toFixed(2)}</td>
+            <td>${book.stock}</td>
+            <td><button onclick="inventory.deleteBook(${index})">Delete</button></td>
+          `;
+
+          list.appendChild(row);
+        });
+      }
+    }
+
+    const inventory = new InventoryManager();
+
+    document.getElementById("bookForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const title = document.getElementById("title").value;
+      const author = document.getElementById("author").value;
+      const isbn = document.getElementById("isbn").value;
+      const price = document.getElementById("price").value;
+      const stock = document.getElementById("stock").value;
+
+      const newBook = new Book(title, author, isbn, price, stock);
+      inventory.addBook(newBook);
+      this.reset();
+    });
+  </script>
+</body>
+</html>
