@@ -1,0 +1,26 @@
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+.icon-bar{
+    width: 50%;
+    background-color: rgb(129, 129, 129);
+    overflow: auto;
+}
+.icon-bar a{
+    /* display: inline-block; */
+    text-align: center;
+    padding: 10px;
+    font-size: 40px;
+    color: white;
+    transition: all 0.3s ease;
+    float: left;
+    width: 20%;
+}
+.icon-bar a:hover{
+    background-color: aqua;
+}
+.active {
+  background-color: #15faa6; /* Add an active/current color */
+}
