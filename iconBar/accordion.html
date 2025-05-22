@@ -47,6 +47,7 @@
         const accordion = document.querySelectorAll('.sec');
         accordion.forEach(btn => {
             btn.addEventListener('click',()=>{
+                console.dir(btn);
                 btn.classList.toggle('active');
                 const panel = btn.nextElementSibling;
                 if(panel.style.maxHeight){
