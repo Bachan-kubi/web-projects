@@ -10,29 +10,73 @@
             margin: 0;
             box-sizing: border-box;
         }
-        .section{
+        .sec{
             width: 100%;
         }
+        .panel {
+        width: 50%;
+        font-size: 25px;
+        margin: 0 auto;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease-out;
+    }
+
+    .sec.active {
+        background-color: #ccc; /* Optional styling for active button */
+    }
     </style>
 </head>
 <body>
 
-    <button class="section">Section</button>
+    <button class="sec">Section</button>
     <div class="panel">
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore saepe ut officia illo earum, dolores voluptatem consequuntur corrupti voluptas, tenetur necessitatibus aliquam quam vero? Aliquid maxime laboriosam cum dignissimos nobis necessitatibus repudiandae sit fuga, voluptate doloribus. Sed at tenetur nulla molestias sit tempore dolores aliquam eligendi accusantium, modi, recusandae quas!</p>
+        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Cum, obcaecati quod recusandae maiores reiciendis doloremque nisi sit quidem aut delectus omnis accusantium repellat explicabo eum sunt illum dolore asperiores mollitia vel quas soluta perferendis labore consectetur? Quos doloremque repellendus tempora dolorum facere beatae, amet accusantium id ad, ex hic saepe delectus debitis enim maxime harum nam numquam ipsam voluptates architecto necessitatibus, eius dolore? Eveniet dignissimos eligendi dolor ullam sint quod alias laudantium omnis sunt. Libero adipisci, ratione quod saepe eaque repudiandae nisi tempora explicabo ipsam iure magnam animi enim aut optio totam sed a sint porro veniam inventore commodi nulla.</p>
     </div>
-    <button class="section">Section</button>
+    <button class="sec">Section</button>
     <div class="panel">
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore saepe ut officia illo earum, dolores voluptatem consequuntur corrupti voluptas, tenetur necessitatibus aliquam quam vero? Aliquid maxime laboriosam cum dignissimos nobis necessitatibus repudiandae sit fuga, voluptate doloribus. Sed at tenetur nulla molestias sit tempore dolores aliquam eligendi accusantium, modi, recusandae quas!</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Error odit quidem perspiciatis itaque, quod incidunt fuga sequi necessitatibus, eveniet illum ullam? Officiis quae sapiente, natus earum animi totam? Nobis laudantium molestiae nulla commodi tempora non consequatur esse molestias eum quisquam officiis, incidunt saepe sapiente provident animi dolorum, nisi et! Eaque iure unde est consequatur quidem tenetur officia vel molestias necessitatibus dolores, provident magni at pariatur et delectus itaque hic voluptates vitae eius quos porro suscipit alias. Esse quos, ipsum quidem in vitae, molestiae dolore est natus necessitatibus error nostrum illo eveniet eum. Libero ad similique odit cumque rem molestias deserunt.</p>
     </div>
-    <button class="section">Section</button>
+    <button class="sec">Section</button>
     <div class="panel">
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore saepe ut officia illo earum, dolores voluptatem consequuntur corrupti voluptas, tenetur necessitatibus aliquam quam vero? Aliquid maxime laboriosam cum dignissimos nobis necessitatibus repudiandae sit fuga, voluptate doloribus. Sed at tenetur nulla molestias sit tempore dolores aliquam eligendi accusantium, modi, recusandae quas!</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga omnis animi id aperiam necessitatibus hic voluptatibus saepe, maiores sed, ut ullam facilis excepturi delectus inventore expedita similique perspiciatis nihil. Quis, ullam. Id, earum commodi. Consequatur dolorum, molestias inventore cupiditate voluptate numquam distinctio explicabo similique? Doloremque vero harum, ut illo impedit, sapiente exercitationem sit aspernatur vel sequi error sunt cupiditate! Vel sapiente aliquid, beatae tenetur exercitationem numquam natus totam iure minus doloribus commodi ratione voluptatem deleniti? Saepe iure ratione excepturi deleniti. Repudiandae commodi, quis neque dolor, perspiciatis laboriosam repellendus iusto suscipit voluptate assumenda aperiam corrupti odit, atque eos veritatis labore dignissimos.</p>
     </div>
     
 
     <script>
+        const accordion = document.querySelectorAll('.sec');
+        accordion.forEach(btn => {
+            btn.addEventListener('click',()=>{
+                btn.classList.toggle('active');
+                const panel = btn.nextElementSibling;
+                if(panel.style.maxHeight){
+                    panel.style.maxHeight = null;
+                }else{
+                    panel.style.maxHeight = panel.scrollHeight +"px";
+                }
+            })
+            
+        });
+        // function accordions(){
+        //     const accordion = document.getElementsByClassName('sec');
+        //     for(let i=0;i<accordion.length;i++){
+        //         console.log(accordion[i]);
+        //         accordion[i].addEventListener('click', function(){
+        //             console.log('object');
+        //             console.log(this);
+        //             this.classList.toggle('active');
+        //             const panel = this.nextElementSibling;
+        //          if (panel.style.maxHeight) {
+        //             panel.style.maxHeight = null;
+        //         } else {
+        //             panel.style.maxHeight = panel.scrollHeight + "px";
+        //         }
 
+        //         });
+                
+        //     }
+        // }
+        // accordions();
     </script>
 </body>
 </html>
