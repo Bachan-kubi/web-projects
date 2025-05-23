@@ -4,8 +4,109 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tab</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        .tabs{
+            overflow: hidden;
+            border: 1px solid red;
+            background-color: #f1f1f1;
+        }
+        .tabs button{
+            background-color: inherit;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 14px 16px;
+            transition: 0.3s;
+            font-size: 25px;
+        }
+        .tabs button:hover {
+  background-color: #ddd;
+}
+.tabs button.active {
+  background-color: #ccc;
+}
+
+.fulltext{
+    border: 1px solid red;
+    border-top: none;
+    padding: 10px 15px;
+    display: none;
+}
+    </style>
 </head>
 <body>
-    
+    <div class="tabs">
+        <button class="btn-tab" onclick="tabOpen(event, 'Dhaka')">Dhaka</button>
+        <button class="btn-tab" onclick="tabOpen(event, 'India')">India</button>
+        <button class="btn-tab" onclick="tabOpen(event, 'Pakistan')">Pakistan</button>
+    </div>
+    <div id="Dhaka" class="fulltext">
+        <h1>Dhaka</h1>
+        <h4>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quas incidunt consequatur labore temporibus pariatur quae ullam sed accusantium illo animi maiores quod culpa perferendis ipsum asperiores delectus doloribus eius, mollitia molestiae quia repudiandae. Alias dolor debitis veniam, sed similique corporis aut quis minima quod perspiciatis dolores itaque sit obcaecati repudiandae!</h1>
+    </div>
+    <div id="India" class="fulltext">
+        <h1>India</h1>
+        <h4>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quas incidunt consequatur labore temporibus pariatur quae ullam sed accusantium illo animi maiores quod culpa perferendis ipsum asperiores delectus doloribus eius, mollitia molestiae quia repudiandae. Alias dolor debitis veniam, sed similique corporis aut quis minima quod perspiciatis dolores itaque sit obcaecati repudiandae!</h1>
+    </div>
+    <div id="Pakistan" class="fulltext">
+        <h1>Pakistan</h1>
+        <h4>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quas incidunt consequatur labore temporibus pariatur quae ullam sed accusantium illo animi maiores quod culpa perferendis ipsum asperiores delectus doloribus eius, mollitia molestiae quia repudiandae. Alias dolor debitis veniam, sed similique corporis aut quis minima quod perspiciatis dolores itaque sit obcaecati repudiandae!</h1>
+    </div>
+
+    <script>
+        // function tabOpen(e, cityName) {
+        //     document.querySelectorAll('.fulltext').forEach(el=>{
+        //         el.style.displa = 'none'
+        //     });
+        //     document.querySelectorAll('.btn-tab').forEach(el=>{
+        //         el.classList.remove('active');
+        //     });
+        //     document.getElementById(cityName).style.display = 'block';
+        //     e.currentTarget.classList.add('active');
+        // }
+
+        // function tabOpen(e, cityName) {
+        //     let i, fullText, btnTabs;
+        //     fullText = document.getElementsByClassName('fulltext');
+        //     btnTabs = document.getElementsByClassName('btn-tab');
+        //     for(i=0;i<fullText.length;i++){
+        //         console.log(fullText[i]);
+        //         fullText[i].style.display = 'none'
+        //     }
+        //     for(i=0; i<btnTabs.length; i++){
+        //         btnTabs[i].classList.remove('active');
+        //     }
+        //     document.getElementById(cityName).style.display = 'block';
+        //     e.currentTarget.classList.add('active');
+        // }
+
+
+       
+function tabOpen(e, cityName) {
+    // Hide all content sections
+    document.querySelectorAll('.fulltext').forEach(el => {
+        el.style.display = 'none';
+    });
+
+    // Remove 'active' class from all tab buttons
+    document.querySelectorAll('.btn-tab').forEach(btn => {
+        btn.classList.remove('active');
+    });
+
+    // Show the selected content section
+    document.getElementById(cityName).style.display = 'block';
+
+    // Add 'active' class to the clicked tab
+    e.currentTarget.classList.add('active');
+}
+
+
+        
+    </script>
 </body>
 </html>
