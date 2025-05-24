@@ -28,7 +28,7 @@
   background-color: #ddd;
 }
 .tabs button.active {
-  background-color: #ccc;
+  background-color: #5f0d0d;
 }
 
 .fulltext{
@@ -37,9 +37,41 @@
     padding: 10px 15px;
     display: none;
 }
+.parent .box{
+    padding: 10px;
+    background-color: green;
+    color: white;
+    margin: 25px;
+    width: 25%;
+}
+.static{
+    position: static;
+}
+.relative{
+    position: relative;
+}
+.absolute{
+    position: absolute;
+    top: 25px;
+    left: 30%;
+}
+.fixed{
+    position: fixed;
+}
+.sticky{
+    position: sticky;
+}
     </style>
 </head>
 <body>
+    <div class="parent">
+  <div class="box static">Static</div>
+  <div class="box relative">Relative</div>
+  <div class="box absolute">Absolute</div>
+  <div class="box fixed">Fixed</div>
+  <div class="box sticky">Sticky</div>
+</div>
+
     <div class="tabs">
         <button class="btn-tab" onclick="tabOpen(event, 'Dhaka')">Dhaka</button>
         <button class="btn-tab" onclick="tabOpen(event, 'India')">India</button>
