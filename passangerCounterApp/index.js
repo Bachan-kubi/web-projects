@@ -4,6 +4,7 @@ const decrease = document.getElementById("btnDecrease");
 const saveDisplay = document.getElementById('saveDisplay');
 const save = document.getElementById('save');
 const btnClear = document.getElementById('btnClear');
+const resetBtn = document.getElementById('btnReset');
 let count = 0;
 
 function updateDisplay(){
@@ -38,7 +39,14 @@ function hancleClear(){
     updateDisplay();
     displayNumber.classList.remove('displayBack');
 }
+function handleReset(){
+    count = 0;
+    saveDisplay.textContent = count;
+    updateDisplay();
+
+}
 increase.addEventListener('click', handleIncrease);
 decrease.addEventListener('click', handleDecrease);
 save.addEventListener('click', savePart);
 btnClear.addEventListener("click", hancleClear);
+resetBtn.addEventListener("click", handleReset);
