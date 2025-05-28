@@ -1,0 +1,46 @@
+BEGIN
+
+1. INITIALIZE an empty array called todoList to store task objects
+
+2. FUNCTION: renderTodoList()
+   - CLEAR the display area (e.g., UL or DIV)
+   - FOR EACH item in todoList:
+       - CREATE a list item (LI)
+       - IF item is marked complete, style it (e.g., strikethrough)
+       - ADD "Complete" and "Delete" buttons to the item
+       - APPEND the item to the display area
+
+3. FUNCTION: addTodo(taskText)
+   - IF taskText is not empty:
+       - CREATE a task object with:
+           - text: taskText
+           - completed: false
+       - PUSH task object to todoList
+       - CALL renderTodoList()
+
+4. FUNCTION: toggleComplete(index)
+   - TOGGLE the 'completed' status of the task at given index
+   - CALL renderTodoList()
+
+5. FUNCTION: deleteTodo(index)
+   - REMOVE task from todoList using splice
+   - CALL renderTodoList()
+
+6. FUNCTION: setupEventListeners()
+   - ATTACH a 'submit' event to the task form/input
+       - PREVENT default form submission
+       - CALL addTodo() with input value
+       - CLEAR input field
+   - ADD event delegation to listen for "Complete" and "Delete" button clicks
+       - IDENTIFY which task index was clicked
+       - CALL toggleComplete() or deleteTodo() accordingly
+
+7. CALL setupEventListeners()
+
+END
+ Bonus Features (Optional in Pseudocode)
+Save tasks in localStorage so they persist after reload.
+
+Add an "Edit" button to change task text.
+
+Filter tasks (All, Completed, Incomplete).
