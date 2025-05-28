@@ -1,7 +1,4 @@
 ✅ 1. Initialize the index
-js
-Copy
-Edit
 let slideIndex = 0;
 This variable keeps track of which slide is currently being shown.
 
@@ -13,16 +10,12 @@ slideShow();
 This runs the slideShow() function immediately after the script is loaded, kicking off the automatic slideshow loop.
 
 ✅ 3. Define the slideshow function
-js
-Copy
-Edit
+
 function slideShow(){
 This function handles the logic of hiding all slides, showing the current one, and highlighting the corresponding dot.
 
 ✅ 4. Get references to the slides and dots
-js
-Copy
-Edit
+
 const slides = document.getElementsByClassName("slides");
 const dots = document.getElementsByClassName('dot');
 slides: This is an array-like object containing all elements with class slides (each image slide).
