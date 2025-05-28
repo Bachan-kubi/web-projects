@@ -24,6 +24,9 @@ function handleDecrease(){
     }
 }
 function savePart(){
+    if(count === 0){
+        return alert('zero not save!')
+    }
     saveDisplay.textContent += count + "-";
     count= 0;
     updateDisplay();
@@ -34,7 +37,6 @@ function hancleClear(){
     saveDisplay.innerHTML = "";
     updateDisplay();
     displayNumber.classList.remove('displayBack');
-    displayNumber.style.display = "none";
 }
 increase.addEventListener('click', handleIncrease);
 decrease.addEventListener('click', handleDecrease);
