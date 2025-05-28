@@ -13,14 +13,14 @@ function updateDisplay(){
 }
 
 function handleIncrease(){
-    displayNumber.textContent = count++;
+    count++;
     updateDisplay();
 }
 function handleDecrease(){
     if(count<=0){
         return alert('limited')
         }else{
-        displayNumber.textContent = count--;
+        count--;
         updateDisplay();
     }
 }
@@ -45,6 +45,7 @@ function handleReset(){
     updateDisplay();
 
 }
+
 increase.addEventListener('click', handleIncrease);
 decrease.addEventListener('click', handleDecrease);
 save.addEventListener('click', savePart);
