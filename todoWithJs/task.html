@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do App</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen flex flex-col items-center justify-center">
+    <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
+        <h1 class="text-2xl font-bold mb-4 text-center">To-Do List</h1>
+        <div class="flex mb-4">
+            <input
+                type="text"
+                id="taskInput"
+                placeholder="Add a new task..."
+                class="flex-1 p-2 border rounded-l-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            >
+            <button
+                onclick="addTask()"
+                class="bg-blue-500 text-white px-4 py-2 rounded-r-lg hover:bg-blue-600"
+            >
+                Add
+            </button>
+        </div>
+        <ul id="taskList" class="space-y-2"></ul>
+    </div>
+
+    <script>
+        // Load tasks from local storage when the page loads
+        document.addEventListener('DOMContentLoaded', loadTasks);
+
+        function addTask() {
+            const taskInput = document.getElementById('taskInput');
+            const taskText = taskInput.value.trim();
+
+            if (taskText === '') {
+                alert('Please enter a task!');
+                return;
+            }
+
+            const task = {
+                id: Date.now(),
+                text: taskText,
+                completed: false
+            };
+
+            // Save task to local storage
+            saveTask(task);
+
+            // Add task to the UI
+            renderTask(task);
+
+            // Clear input
+            taskInput.value = '';
+        }
+
+        function renderTask(task) {
+            const taskList = document.getElementById('taskList');
+            const li = document.createElement('li');
+            li.className = `flex justify-between items-center p-2 border-b ${task.completed ? 'line-through text-gray-500' : ''}`;
+            li.dataset.id = task.id;
+
+            li.innerHTML = `
+                <span onclick="toggleTask(${task.id})" class="cursor-pointer flex-1">${task.text}</span>
+                <button onclick="deleteTask(${task.id})" class="text-red-500 hover:text-red-700">Delete</button>
+            `;
+
+            taskList.appendChild(li);
+        }
+
+        function saveTask(task) {
+            let tasks = getTasks();
+            tasks.push(task);
+            localStorage.setItem('tasks', JSON.stringify(tasks));
+        }
+
+        function getTasks() {
+            return JSON.parse(localStorage.getItem('tasks')) || [];
+        }
+
+        function loadTasks() {
+            const tasks = getTasks();
+            tasks.forEach(task => renderTask(task));
+        }
+
+        function toggleTask(id) {
+            let tasks = getTasks();
+            tasks = tasks.map(task => {
+                if (task.id === id) {
+                    task.completed = !task.completed;
+                }
+                return task;
+            });
+            localStorage.setItem('tasks', JSON.stringify(tasks));
+            refreshTaskList();
+        }
+
+        function deleteTask(id) {
+            let tasks = getTasks();
+            tasks = tasks.filter(task => task.id !== id);
+            localStorage.setItem('tasks', JSON.stringify(tasks));
+            refreshTaskList();
+        }
+
+        function refreshTaskList() {
+            const taskList = document.getElementById('taskList');
+            taskList.innerHTML = '';
+            loadTasks();
+        }
+    </script>
+</body>
+</html>
