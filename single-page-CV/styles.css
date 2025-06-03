@@ -1,0 +1,24 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+.main{
+    max-width: 60%;
+    margin: 0 auto;
+    background-color: teal;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+}
+.cv{
+    margin-top: 3rem;
+    width: 60%;
+    border: 2px solid white;
+    padding: 2rem;
+    height: 80%;
+}
+hr{
+    margin: 1rem 0;
+}
