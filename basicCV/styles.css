@@ -39,6 +39,7 @@ main{
     display: flex;
     background-color: teal;
     text-align: center;
+    color: white;
 }
 main .left{
     width: 30%;
@@ -52,7 +53,31 @@ main .right{
     width: 35%;
     border: 2px solid red;
 }
-h5{
+.left h5{
     margin: 10px;
-    border-bottom: 2px solid red;
+    padding: 15px;
+}
+.middle h5, p{
+    padding: 15px;
+}
+.testimony{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    background-color: cornflowerblue;
+     perspective: 1000px;
+}
+.testimony .card{
+    border: 2px solid teal;
+    border-radius: 10px;
+    padding: 15px;
+    margin: 1.5rem;
+    text-align: center;
+    transition: 300ms ease;
+}
+.testimony .card:hover{
+    background-color: aqua;
+    transform: rotateY(-5deg);
+    
 }
