@@ -80,3 +80,13 @@ main .right{
     background-color: aqua;
     transform: rotateY(-5deg);
 }
+.hlw{
+    color: red;
+}
+.hlw::before{
+    content: "ki je kore ";
+}
+.hlw::after{
+     content: "👉";
+  margin-left: 1rem;
+}
