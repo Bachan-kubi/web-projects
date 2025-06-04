@@ -79,5 +79,4 @@ main .right{
 .testimony .card:hover{
     background-color: aqua;
     transform: rotateY(-5deg);
-    
 }
